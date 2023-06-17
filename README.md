@@ -8,5 +8,6 @@ The present repository contains a set of Python Notebooks developed for the Mast
 The objective is to implement a set of LED lights in a model that can be manipulated by EEG sensors, during the game in pairs what is desired is to collect the EEG data generated with which the Data Analysis will be developed.
 
 Tools used:
-* Python Notebooks (Libraries: MNE, Pandas, Matplotlib and Scipy)
+* Python Notebooks (Libraries: MNE, Pandas, Matplotlib, and Scipy)
+* Google Colab
 * NeuroSkyLab, NeuroView, ThinkGear
