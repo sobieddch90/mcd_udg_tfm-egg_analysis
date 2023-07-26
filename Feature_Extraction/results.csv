@@ -1,0 +1,21 @@
+Feature Extraction,Description,Channels,Metrics,CV,ML Model,Accuracy
+Time-Frequency Domain,PSD Metrics from Epochs (1-50 Hz),FP1,"Total Power, Relative Power, Peak Frequency, Spectral Entropy",KFold: 5 Folds,SVM,0.6454545454545455
+Time-Frequency Domain,PSD Metrics from Epochs (1-50 Hz),FP1,"Total Power, Relative Power, Peak Frequency, Spectral Entropy",KFold: 5 Folds,Random Forest,0.509090909090909
+Time-Frequency Domain,PSD Metrics from Epochs (1-50 Hz),FP1,"Total Power, Relative Power, Peak Frequency, Spectral Entropy",KFold: 5 Folds,AdaBoost,0.35454545454545455
+Time-Frequency Domain,PSD Metrics from Epochs (1-50 Hz),FP1,"Total Power, Relative Power, Peak Frequency, Spectral Entropy",KFold: 5 Folds,XGBoost,0.37636363636363634
+Time-Frequency Domain,PSD Metrics from Epochs (1-50 Hz),FP1,"Total Power, Relative Power, Peak Frequency, Spectral Entropy",KFold: 5 Folds,LightGBM,0.5854545454545454
+Time-Frequency Domain,PSD Metrics from Epochs (1-50 Hz),All,"Total Power, Relative Power, Peak Frequency, Spectral Entropy",KFold: 5 Folds,SVM,0.6454545454545455
+Time-Frequency Domain,PSD Metrics from Epochs (1-50 Hz),All,"Total Power, Relative Power, Peak Frequency, Spectral Entropy",KFold: 5 Folds,Random Forest,0.47272727272727266
+Time-Frequency Domain,PSD Metrics from Epochs (1-50 Hz),All,"Total Power, Relative Power, Peak Frequency, Spectral Entropy",KFold: 5 Folds,AdaBoost,0.35454545454545455
+Time-Frequency Domain,PSD Metrics from Epochs (1-50 Hz),All,"Total Power, Relative Power, Peak Frequency, Spectral Entropy",KFold: 5 Folds,XGBoost,0.37636363636363634
+Time-Frequency Domain,PSD Metrics from Epochs (1-50 Hz),All,"Total Power, Relative Power, Peak Frequency, Spectral Entropy",KFold: 5 Folds,LightGBM,0.5854545454545454
+Time-Frequency Domain,"PSD Metrics from Epochs For each Frequency Band (Delta, Theta, Alpha, Beta, Gamma)",FP1,"Total Power, Relative Power, Peak Frequency, Spectral Entropy",KFold: 5 Folds,SVM,0.6454545454545455
+Time-Frequency Domain,"PSD Metrics from Epochs For each Frequency Band (Delta, Theta, Alpha, Beta, Gamma)",FP1,"Total Power, Relative Power, Peak Frequency, Spectral Entropy",KFold: 5 Folds,Random Forest,0.570909090909091
+Time-Frequency Domain,"PSD Metrics from Epochs For each Frequency Band (Delta, Theta, Alpha, Beta, Gamma)",FP1,"Total Power, Relative Power, Peak Frequency, Spectral Entropy",KFold: 5 Folds,AdaBoost,0.4909090909090909
+Time-Frequency Domain,"PSD Metrics from Epochs For each Frequency Band (Delta, Theta, Alpha, Beta, Gamma)",FP1,"Total Power, Relative Power, Peak Frequency, Spectral Entropy",KFold: 5 Folds,XGBoost,0.5672727272727273
+Time-Frequency Domain,"PSD Metrics from Epochs For each Frequency Band (Delta, Theta, Alpha, Beta, Gamma)",FP1,"Total Power, Relative Power, Peak Frequency, Spectral Entropy",KFold: 5 Folds,LightGBM,0.5254545454545454
+Time-Frequency Domain,"PSD Metrics from Epochs For each Frequency Band (Delta, Theta, Alpha, Beta, Gamma)",All,"Total Power, Relative Power, Peak Frequency, Spectral Entropy",KFold: 5 Folds,SVM,0.6454545454545455
+Time-Frequency Domain,"PSD Metrics from Epochs For each Frequency Band (Delta, Theta, Alpha, Beta, Gamma)",All,"Total Power, Relative Power, Peak Frequency, Spectral Entropy",KFold: 5 Folds,Random Forest,0.6254545454545454
+Time-Frequency Domain,"PSD Metrics from Epochs For each Frequency Band (Delta, Theta, Alpha, Beta, Gamma)",All,"Total Power, Relative Power, Peak Frequency, Spectral Entropy",KFold: 5 Folds,AdaBoost,0.5490909090909091
+Time-Frequency Domain,"PSD Metrics from Epochs For each Frequency Band (Delta, Theta, Alpha, Beta, Gamma)",All,"Total Power, Relative Power, Peak Frequency, Spectral Entropy",KFold: 5 Folds,XGBoost,0.5654545454545454
+Time-Frequency Domain,"PSD Metrics from Epochs For each Frequency Band (Delta, Theta, Alpha, Beta, Gamma)",All,"Total Power, Relative Power, Peak Frequency, Spectral Entropy",KFold: 5 Folds,LightGBM,0.6654545454545454
