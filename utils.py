@@ -2,7 +2,7 @@
 Author: Elmo Chavez
 Date:   27-Jul-2023
 ---------------------
-All the functions required to extract features from the EEG Data based on different approaches.
+All the functions required to extract features and classify AD and FTD from the EEG Data based on different approaches.
 
 '''
 
@@ -11,19 +11,40 @@ import numpy as np
 from mne.time_frequency import tfr_multitaper, tfr_morlet
 from scipy.stats import skew, kurtosis
 
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+from sklearn.model_selection import KFold, StratifiedKFold, StratifiedShuffleSplit
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+from sklearn.feature_selection import SelectKBest, mutual_info_classif, SelectPercentile, f_classif
+
+import xgboost as xgb
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
+import lightgbm as lgb
+
+#--------------------------#--------------------------#
+# First 
+#--------------------------#--------------------------#
+
+
 # Common variables
 metrics = ['mean','standard_deviation','variance','peak_to_peak','skewness','kurtosis']
 
 #--------------------------
 #       Stats Approach
-#--------------------------
-
 def Stats_Features(epochs):
     # Get data from Epochs
+    channels = epochs.ch_names
     epochs_data = epochs.get_data()
     
     # Compute features for each Channel from Epochs and Points
-    ch_mean = np.mean(epochs_data,axis=(0,2))
+    ch_mean = np.mean(epochs_data, axis=(0,2))
+    ch_std = np.std(epochs_data, axis=(0,2))
     ch_var = np.var(epochs_data, axis=(0,2))
     ch_ptp = np.ptp(epochs_data, axis=(0,2))
     ch_skew = skew(epochs_data, axis=(0,2))
@@ -31,17 +52,22 @@ def Stats_Features(epochs):
     
     # Concatenate and intercalate to have each metric's channel together
     stat_features = np.column_stack((ch_mean.reshape(1, -1), 
+                                     ch_std.reshape(1,-1),
                                      ch_var.reshape(1, -1), 
                                      ch_ptp.reshape(1, -1), 
                                      ch_skew.reshape(1, -1), 
                                      ch_kurtosis.reshape(1, -1)))
     
+    column_names = [f"{ch}_{metric}" for metric in metrics for ch in channels]
+    dtypes = ['float'] * len(column_names)
+    
+    # Sort each feature by Channel
+    stat_features = stat_features.astype(list(zip(column_names, dtypes)))
+    
     return stat_features
 
 #--------------------------
 #       TFR Approach
-#--------------------------
-
 def TFR_Features(epochs, freqs, n_cycles, method='multitaper', time_bandwidth=4.0):
     
     channels = epochs.ch_names
@@ -74,8 +100,6 @@ def TFR_Features(epochs, freqs, n_cycles, method='multitaper', time_bandwidth=4.
 
 #--------------------------
 #       PSD Approach
-#--------------------------
-
 def PSD_Features(epochs, fmin=0.5, fmax=45.0, method='multitaper'):
     # Get all channels
     channels = epochs.ch_names
@@ -101,5 +125,3 @@ def PSD_Features(epochs, fmin=0.5, fmax=45.0, method='multitaper'):
     psd_features = psd_features.astype(list(zip(column_names, dtypes)))
     
     return psd_features
-    
-    
