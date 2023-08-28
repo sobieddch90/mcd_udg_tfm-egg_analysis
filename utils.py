@@ -140,7 +140,7 @@ frequency_bands = {
 }
 
 
-def get_Features_PSD(raw, channels=None, start_time = 0, end_time = 600, duration = 60.0, overlapping = 30.0):
+def get_Features_PSD(raw, type='epoch', channels=None, start_time = 0, end_time = 600, duration = 60.0, overlapping = 30.0):
     # variables
     sfreq = raw.info['sfreq']
     
@@ -148,9 +148,13 @@ def get_Features_PSD(raw, channels=None, start_time = 0, end_time = 600, duratio
     if channels==None: ch = raw.ch_names
     else: ch = channels        
     
-    # Get Epochs Data
-    data = mne.make_fixed_length_epochs(raw.copy().pick(ch).crop(tmin=start_time, tmax=end_time),
-                                    duration=duration, overlap=overlapping, preload=True, verbose='CRITICAL').get_data()
+    if type=='epoch':
+        # Get Epochs Data
+        data = mne.make_fixed_length_epochs(raw.copy().pick(ch).crop(tmin=start_time, tmax=end_time),
+                                        duration=duration, overlap=overlapping, preload=True, verbose='CRITICAL').get_data()
+    elif type=='raw':
+        data = raw.copy().pick(ch).crop(tmin=start_time, tmax=end_time).get_data()
+    
     # Compute features
     results = {}
     for band, (fmin,fmax) in frequency_bands.items():
@@ -166,10 +170,10 @@ def get_Features_PSD(raw, channels=None, start_time = 0, end_time = 600, duratio
         average_power = psd.mean()
         #entropy = compute_spect_entropy(data_filtered, sfreq=sfreq)
         entropy = -np.sum(np.log(psd) * psd)
-        std_dev = np.std(data_filtered)
-        peak_to_peak = np.ptp(data_filtered)
-        kurt = kurtosis(data_filtered)
-        skewness = skew(data_filtered)
+        std_dev = np.std(psd)
+        peak_to_peak = np.ptp(psd)
+        kurt = kurtosis(psd)
+        skewness = skew(psd)
         # Store results
         results[f'{band}_total_power'] = total_power
         results[f'{band}_relative_power'] = relative_power
@@ -227,10 +231,10 @@ def predictor(X, y, approach, frequencies, channels, features_names, selector_k,
     xgboost_classifier = xgb.XGBClassifier()
     lightgbm_classifier = lgb.LGBMClassifier()
 
-    classifiers = [svm_classifier, random_forest_classifier, adaboost_classifier, 
-                   xgboost_classifier, lightgbm_classifier]
-    classifier_names = ['SVM', 'Random Forest', 'AdaBoost', 
-                        'XGBoost', 'LightGBM']
+    classifiers = [svm_classifier, random_forest_classifier, adaboost_classifier, #xgboost_classifier, 
+                   lightgbm_classifier]
+    classifier_names = ['SVM', 'Random Forest', 'AdaBoost', #'XGBoost', 
+                        'LightGBM']
 
     # Create a cross-validator with 5 folds
     n_splits = 5
